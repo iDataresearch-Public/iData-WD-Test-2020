@@ -1,23 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>iData Test</title>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-  </head>
+<head>
+  <title>iData Test</title>
 
-  <body>
-    <div style="display: flex; justify-content: center; margin-top: 20%;">
-      <h1>Welcome to the iData Research Web Developer Test</h1>
-    </div>
-  </body>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+
+  <style>
+    #data-table {
+      display: flex;
+      justify-content: center;
+      width: 80%;
+      margin-top: 50px;
+    }
+
+
+    #data-table #table-header {
+      border-top: 1px solid rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    #data-table th {
+      min-width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20%;">
+    <h1>Welcome to the iData Research Web Developer Test</h1>
+
+    <button style="width: 150px; height: 50px; margin-top: 50px" type="submit" id="btn-get-data"
+      onclick="generateData()">Submit</button>
+
+    <table id="data-table">
+      <tr id="table-header">
+        <th>Timestamp</th>
+        <th>Currency</th>
+        <th>Symbol</th>
+        <th>Market Price</th>
+      </tr>
+      <tr>
+        <td id="data-time"></td>
+        <td id="data-currency"></td>
+        <td id="data-symbol"></td>
+        <td id="data-mktPrice"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    async function generateData() {
+      const response = await fetch('http://localhost:5000/api');
+      let responseData;
+
+      if (response.ok) {
+        response.json().then(function (data) {
+          responseData = data.chart.result[0];
+
+          document.getElementById("data-time").innerHTML = Date();
+          document.getElementById("data-currency").innerHTML = responseData.meta.currency;
+          document.getElementById("data-symbol").innerHTML = responseData.meta.symbol;
+          document.getElementById("data-mktPrice").innerHTML = responseData.meta.regularMarketPrice;
+
+          console.log(responseData.meta);
+        });
+      } else {
+        console.log("error");
+      }
+
+      //Show table
+      document.getElementById("data-table").style.display = "flex";
+    }
+  </script>
+</body>
+
 </html>
