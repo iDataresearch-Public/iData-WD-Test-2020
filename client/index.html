@@ -7,7 +7,7 @@
 	<link rel="icon" type="image/x-icon" href="favicon.png">
 </head>
 <body style="padding: 20px">
-<button onclick="process()">Submit</button>
+<button onclick="process()" id="id">Submit</button>
 <div class="tabContainer">
     <div class="buttonContainer">
         <button onclick="showPanel(0,'#f44336')">Timestamp</button>
@@ -23,6 +23,7 @@
 </div>
 
 <script src="myScript.js"> function process(){
+  var button = document.getElementById('id')
   div class="tabContainer">
       <div class="buttonContainer">
           <button onclick="showPanel(0,'#f44336')">Timestamp</button>
@@ -36,6 +37,7 @@
       <div class="tabPanel">AAPL</div>
       <div class="tabPanel">336:Content</div>
   </div>
+
 
 }
 </script>
