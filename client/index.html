@@ -16,30 +16,34 @@
         <button onclick="showPanel(3,'#ff5722')">Market Price</button>
     </div>
 
-    <div class="tabPanel">Tab 1:Content</div>
-    <div class="tabPanel">Tab 2:Content</div>
-    <div class="tabPanel">Tab 3:Content</div>
-    <div class="tabPanel">Tab 4:Content</div>
+    <div id="time">Tab 1:Content</div>
+    <div id="currency">Tab 2:Content</div>
+    <div id="symbol">Tab 3:Content</div>
+    <div id="price">Tab 4:Content</div>
 </div>
+<script>
+async function process() {
+       const response = await fetch('http://localhost:5000/api');
+       let responseData;
 
-<script src="myScript.js"> function process(){
-  var button = document.getElementById('id')
-  div class="tabContainer">
-      <div class="buttonContainer">
-          <button onclick="showPanel(0,'#f44336')">Timestamp</button>
-          <button onclick="showPanel(1,'#4caf50')">Currency</button>
-          <button onclick="showPanel(2,'#2196f3')">Symbol</button>
-          <button onclick="showPanel(3,'#ff5722')">Market Price</button>
-      </div>
+       if (response.ok) {
+         response.json().then(function (data) {
+           responseData = data.chart.result[0];
 
-      <div class="tabPanel">Friday june 12 2020 12:00</div>
-      <div class="tabPanel">USD</div>
-      <div class="tabPanel">AAPL</div>
-      <div class="tabPanel">336:Content</div>
-  </div>
+           document.getElementById("time").innerHTML = Date();
+           document.getElementById("currency").innerHTML = responseData.meta.currency;
+           document.getElementById("symbol").innerHTML = responseData.meta.symbol;
+           document.getElementById("price").innerHTML = responseData.meta.regularMarketPrice;
+
+           console.log(responseData.meta);
+         });
+       } else {
+         console.log("error");
+       }
 
 
-}
-</script>
+       document.getElementById("data-table").style.display = "flex";
+     }
+   </script>
 </body>
 </html>
