@@ -5,6 +5,9 @@ const cors = require("cors");
 
 app.use(cors());
 
+app.use(express.static(__dirname + "/client"));
+
+
 app.get("/", async (req, res) => {
   res.sendFile(__dirname + "/client/index.html");
 });
