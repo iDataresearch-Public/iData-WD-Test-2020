@@ -2,8 +2,11 @@ const express = require("express");
 const app = express();
 const axios = require("axios");
 const cors = require("cors");
+const path = require('path');
 
 app.use(cors());
+app.set('view engine', 'ejs');
+
 
 app.use(express.static(__dirname + "/client"));
 
@@ -24,9 +27,14 @@ app.get("/api", async (req, res) => {
     })
     .catch((e) => console.error(e));
 
-  console.log("data: ", data);
 
-  res.json(await data);
+  try {
+    var newData = await data;
+    res.render("result.ejs", newData);
+  } catch (error) {
+    console.log(error);
+  }
+  //console.log(newData.catch.result.currrency);
 });
 const PORT = 5000;
 

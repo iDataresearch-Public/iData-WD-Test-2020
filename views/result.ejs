@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>iData Test</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css"/>
+  </head>
+
+  <body>
+    <div id="mainDiv" class="container">
+      <form id="submitFrm" action="/api" method="get">
+        <button type="submit" class="btn btn-light">Submit</button>
+      </form>
+  
+      <!-- Bootstrap table -->
+      <table class="table table-striped table-responsive-md btn-table">
+  
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Currency</th>
+            <th>Symbol</th>
+            <th>Market Price</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr>
+            <td id="timeStamp"> <%= chart.result %></td>
+            <td id="currency">currency</td>
+            <td id="symbol">symbol</td>
+            <td id="marketPrice">Market Price</td>
+          </tr>
+        </tbody>
+        
+        </table>
+    </div>
+  </body>
+</html>
