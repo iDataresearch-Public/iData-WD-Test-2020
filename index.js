@@ -30,7 +30,8 @@ app.get("/api", async (req, res) => {
 
   try {
     var newData = await data;
-    res.render("result.ejs", newData);
+    const currency = await data.chart.result.currency;
+    res.render("result.ejs", {data: currency});
   } catch (error) {
     console.log(error);
   }
