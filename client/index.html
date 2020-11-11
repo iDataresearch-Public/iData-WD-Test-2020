@@ -7,6 +7,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -14,29 +15,50 @@
       crossorigin="anonymous"
     />
     <style>
-      .main {
+      .table{
         max-width: 960px;
         margin: 2rem auto;
       }
       .title {
         text-align: center;
       }
-      
+
       /* your CSS here */
-    
+
     </style>
   </head>
   <body>
     <div class="main">
-      <h1 class="title">Welcome to the iData Research Web Developer Test</h1>
-      
-      <!-- your HTML here -->
+
+      <button onClick="submit();">Submit</button>
+      <table>
+        <tr>
+          <th>Timestamp</th>
+          <th>Currency</th>
+          <th>Symbol</th>
+          <th>Market Price</th>
+        </tr>
+        <tr>
+            
+        <td>
+        </tr>
+      </table>
 
     </div>
     <script>
+      async function submit(){
+        fetch('http://localhost:5000/api')
+          .then( (resp) => resp.json())
+          .then(function(data){
+            console.log(data);
+          });
       
-      // your JS here
+      }
+
+      
     
+      
+
     </script>
   </body>
 </html>
