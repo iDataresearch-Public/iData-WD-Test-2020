@@ -39,8 +39,10 @@
           <th>Market Price</th>
         </tr>
         <tr>
-            
-        <td>
+          <td id ="Timestamp"></td>
+          <td id="Currency"></td>
+          <td id="Symbol"></td>
+          <td id="MarketPrice"></td>
         </tr>
       </table>
 
@@ -50,7 +52,13 @@
         fetch('http://localhost:5000/api')
           .then( (resp) => resp.json())
           .then(function(data){
-            console.log(data);
+            dataFromResponse = data.chart.result[0].meta;
+            console.log(dataFromResponse);
+
+            document.getElementById("Timestamp").innerHTML = Date();
+            document.getElementById("Currency").innerHTML = dataFromResponse.currency;
+            document.getElementById("Symbol").innerHTML = dataFromResponse.symbol;
+            document.getElementById("MarketPrice").innerHTML = dataFromResponse.regularMarketPrice;
           });
       
       }
