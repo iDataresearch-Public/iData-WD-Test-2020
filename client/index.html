@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>iData Test</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,22 +21,61 @@
       .title {
         text-align: center;
       }
-      
+
+      #submit-button {
+        float: right;
+        margin-bottom: 10px;
+      }
+
       /* your CSS here */
-    
     </style>
   </head>
   <body>
     <div class="main">
-      <h1 class="title">Welcome to the iData Research Web Developer Test</h1>
-      
       <!-- your HTML here -->
-
+      <button id="submit-button">Submit</button>
+      <table id="myTable" class="table">
+        <thead>
+          <tr>
+            <th scope="col">Timestamp</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Market Price</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
     <script>
-      
       // your JS here
-    
+      $("#submit-button").click(function () {
+        axios
+          .get("/api")
+          .then(function (response) {
+            // handle success
+            const array = response.data.chart.result;
+            const currency = array[0]["meta"]["currency"];
+            const symbol = array[0]["meta"]["symbol"];
+            const market_price = array[0]["meta"]["regularMarketPrice"];
+            const currentTime = new Date();
+
+            $("#myTable").append(
+              "<tr><td>" +
+                currentTime +
+                "</td><td>" +
+                currency +
+                "</td><td>" +
+                symbol +
+                "</td><td>" +
+                market_price +
+                "</td></tr>"
+            );
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          });
+      });
     </script>
   </body>
 </html>
